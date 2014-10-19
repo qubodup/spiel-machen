@@ -1,7 +1,7 @@
 Einfach Ein Spiel Machen
 ========================
 
-Ein Kurs für 10-18 Jahre alte Schülerinnen und Schüler.
+Ein Kurs für 10-18 Jahre alte Schülerinnen und Schüler, die nicht programmieren können.
 
 Vorbereitung für Windows-Rechner
 --------------------------------
