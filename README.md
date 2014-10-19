@@ -13,6 +13,11 @@ Vorbereitung für Windows-Rechner
 5. Kopiere das Kurs-Verzeichnis auf den Desktop jeden Computers.
 6. Drucke EinfachEinSpielMachen.pdf mal Anzahl der Köpfe aus. 2 Seiten je Blattseite sind lesbar.
 
+Vorbereitung für Lehrende
+-------------------------
+
+Drucke Dir EinfachEinSpielMachen.pdf aus und folge den Anweisungen.
+
 Ablauf
 ------
 
