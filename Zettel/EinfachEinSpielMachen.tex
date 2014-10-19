@@ -1,0 +1,310 @@
+%% LyX 2.1.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[ngerman]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\newcommand{\noun}[1]{\textsc{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+\makeatother
+
+\usepackage{babel}
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+\begin{document}
+
+\title{Einfach ein Spiel Machen}
+
+
+\date{15. Oktober 2014}
+
+\maketitle
+
+\part{Der Plan}
+
+In diesem Workshop wirst Du Schritt für Schritt ein kleines Computerspiel
+erschaffen. Dazu wirst Du \noun{Lua}-Programmicode abtippen und ergänzen.
+Dieser wird dann von der LÖVE Spiele-Engine als Programm ausgeführt.
+
+
+\part{Das Spiel}
+
+In Deinem Spiel bewegtst Du einen Hund auf einer Wiese und sammelst
+rote Bälle ein. Es gibt Katzen, die zum Spaß die Bälle Platzen lassen
+wollen. Diese vertreibst Du mit lautem Bellen.
+
+
+\section{Die richtige Datei}
+
+Starte den Texteditor \noun{Notepad++} und öffne die Datei ,,main.lua``
+im Verzeichnis ,,Spiel``.
+
+Mache Dich darauf gefasst, \textbf{Doppelpunkte}, \textbf{Anführungszeichen},
+\textbf{Mathematische Symbole}, \textbf{Klammern}, \textbf{Eckklammern
+}und \textbf{geschweifte Klammern }zu tippen. Die \textbf{F4}, \textbf{F6},
+\textbf{Alt} und \textbf{Strg} Tasten, sowie \textbf{Pfeiltasten}
+werden wir ebenfalls verwenden. 
+
+Beim Abtippen bitte auf Groß- und Kleinschreibung beachten, sonst
+funktioniert das Spiel nicht.
+
+
+\section{Malen}
+
+Als erstes soll das Spiel einen Hund malen.
+
+
+\subsection{Hund}
+
+Tippe folgenden Programmcode ab:
+
+\begin{lstlisting}
+function love.load()
+  hundBild = love.graphics.newImage("hund.png")
+end
+
+function love.update()
+
+end
+
+function love.draw()
+  -- Male den Hund am punkt x=300, y=100
+  love.graphics.draw(hundBild, 300, 100)
+end
+\end{lstlisting}
+Speichere nun die Datei (z.B. durch Druck der Tastenkombination \textbf{Strg+S})
+und Drücke \textbf{F6}. Wir haben \noun{Notepad++} so konfiguriert,
+dass \textbf{F6} das Spiel mithilfe von \noun{LÖVE} ausführt. Diesen
+Schritt (Speichern und Ausführen) musst Du jedes Mal wiederholen,
+wenn Du Dein Spiel testen möchtest.
+
+Es sollte ein Programmfenster mit Schwarzer Hintergrundfarbe und einem
+kleinen Hundegesicht erscheinen.
+
+Um den Test zu beenden, kannst Du \textbf{Alt+F4} drücken oder das
+Fenster mit der Maus schließen.
+
+Die drei \emph{Funktionsblöcke}, welche mit \texttt{function} beginnen
+und mit \texttt{end} enden bilden die Grundstruktur jedes \noun{LÖVE}-Spiels.
+\begin{itemize}
+\item In \texttt{love.load()} werden Befehle einmalig zur Vorbereitung ausgeführt.
+In diesem Fall sorgen wir mithilfe der \emph{Funktion} \texttt{love.graphics.newImage()}
+dafür, dass \noun{LÖVE }die Bilddatei \texttt{hund.png} findet und
+das wir auf dieses Bild mit dem Wort \texttt{hundBild }später zugreifen
+können. Wörter, denen wir mithilfe des Gleichheitszeichens eine Bedeutung
+zuweisen, heißen \emph{Variablen}.
+\item In \texttt{love.update()} werden Änderungen im Spiel verarbeitet.
+Beispiel: ,,Die linke Pfeiltaste ist im gedrückten zustand. An welcher
+stelle befindet sich der Hund aktuell?{}`` Im idealfall wird der
+Funktionsblock \texttt{love.update()} 60 mal je Sekunde berechnet,
+also mit einem Zeitabstand von $0.01\overline{6}$ Sekunden.
+\item In \texttt{love.draw()} werden Malbefehle verarbeitet. In diesem Fall
+zeichnet die Funktion \texttt{love.graphics.draw()} die Bilddatei
+\texttt{hund.png}, auf welches die Variable \texttt{hundBild }verweist.
+Der Hund erscheint 300 \emph{Pixel }(Bildpunkte) vom linken Rand und
+100 Pixel vom oberen Rand entfernt.
+\begin{figure}[H]
+\includegraphics{Koordinaten}\protect\caption{Hund im \noun{LÖVE}-Koordinatensystem}
+\end{figure}
+
+\end{itemize}
+In \noun{Lua} wird der Text nach zwei Minuszeichen als Kommentar behandelt.
+Das ist nützlich für Notizen und Erinnerungen, vor allem wenn man
+im Team programmiert. Ihr braucht die Kommentare nicht abtippen, könnt
+aber gerne welche für euch selbst schreiben.
+
+
+\subsection{Gras}
+
+Damit der Hund nicht im Dunkeln sitzt, soll das Spiel Gras malen.
+Füge folgenden Code als neue Zeile in den \texttt{love.load()} Funktionsblock
+ein:
+
+\begin{lstlisting}
+  grasBild = love.graphics.newImage("gras.png")
+\end{lstlisting}
+Der folgende Code gehört als neue Zeile in den \texttt{love.graphics.draw():}
+
+\begin{lstlisting}
+  -- Zeichnet ein größeres Bild von Gras in die linke obere Ecke
+  love.graphics.draw(grasBild,0,0)
+\end{lstlisting}
+Nach dem Speichern und Ausführen sollte nun eine Wiese zu sehen sein.
+Je nachdem, ob Du den Hund oder das Gras an erster Stelle im \texttt{love.draw()}
+Funktionsblock stehen hast, ist der Hund zu sehen oder nicht. In letzterem
+Fall tausche die zwei \texttt{love.graphics.draw()} Zeilen miteinander
+aus.
+
+
+\section{Bewegen}
+
+Jetzt soll der Hund bewegt werden. Dazu werden wir \texttt{if-}Abfragen
+verwenden um folgende Aussage als Programmcode zu schreiben: ,,Wenn
+die linke Pfeiltaste im gedrückten Zustand ist, bewege den Hund nach
+Links.``
+
+
+\subsection{Vorbereitende Variablen}
+
+LÖVE muss sich die Position des Hundes merken. Dazu erstellen wir
+Variablen für die X- und Y-Wert des Punktes, an dem sich der Hund
+befindet in \texttt{love.load()}: 
+
+\begin{lstlisting}
+  hundX = 300
+  hundY = 100
+\end{lstlisting}
+
+
+
+\subsection{Tastenerkennung und Bewegung}
+
+Jetzt prüfen wir, ob Pfeiltasten gedrückt werden und wenn ja, wird
+die Position des Hundes geändert. Füge folgenden \texttt{if}-Abfrageblock
+in \texttt{love.update()} ein:
+
+\begin{lstlisting}
+  if love.keyboard.isDown("left") then
+    hundX = hundX - 5
+  end
+\end{lstlisting}
+\texttt{love.keyboard.isDown()} ist eine Funktion, welche den Namen
+einer Taste als \emph{Parameter }(Inhalt der Klammern) erhält und
+dann \texttt{true }oder \texttt{false }ausgibt, abhängig davon, ob
+die Taste gedrückt wird oder nicht. Der Code im \texttt{if}-Abfrageblock,
+wird ausgeführt, wenn die \texttt{if}-Abfrage \texttt{true} ergibt.
+
+Das Spiel reagiert aber noch nicht auf die Taste, \texttt{love.graphics.draw(hundBild,
+300, 100)} verwendet ja immer die Parameter \texttt{300 }und \texttt{100
+}für die Position des Hundes. Ersetze die Zahlen mit den Variablen,
+die wir erstellt haben.
+
+Kopiere den \texttt{if}-Abfrageblock drei mal und passe die Kopien
+an, sodass die Tasten ,,up``, ,,right`` und ,,down`` die Position
+des Hundes -- beziehungsweise die Variablen \texttt{hundX }und \texttt{hundY
+}-- ebenfalls ändern.
+
+
+\section{Bälle}
+
+Jetzt wollen wir rote Bälle auf die Wiese streuen. Erstelle die Variable
+\texttt{ballZahl = 20} in \texttt{love.load()}.
+
+Jetzt wollen wir 20 mal einen zufälligen Punkt für jeden Ball erstellen.
+Dazu verwenden wir eine Liste, in welche wir 20 kurze Listen schreiben
+(mit 1 bis 20 nummeriert), welche jeweils einen X- und Y-Wert enthalten.
+Man könnte das so machen:
+
+\begin{lstlisting}
+  -- erstellt leere Liste
+  baelle = {}
+  -- weist nacheinander den ersten 20 Listenelementen Werte zu
+  baelle[1] = { math.random(100, 700), math.random(100, 500)}
+  baelle[2] = { math.random(100, 700), math.random(100, 500)}
+  baelle[3] = { math.random(100, 700), math.random(100, 500)}
+\end{lstlisting}
+und so weiter bis:
+
+\begin{lstlisting}
+  baelle[20] = { math.random(100, 700), math.random(100, 500)}
+\end{lstlisting}
+Das geht aber auch kompakter, indem wir eine \texttt{for}-Schleife
+verwenden, welche die gleichen Anweisungen 20 mal wiederholt. Wir
+verwenden die Variable i, die im Ersten Durchlauf gleich 1 ist, im
+zweiten Durchlauf gleich 2 ist usw.
+
+\begin{lstlisting}
+  baelle = {}
+  -- wir zählen von 1 bis ballZahl durch
+  for i=1, ballZahl do
+    baelle[i] = { math.random(100, 700), math.random(100, 500) }
+  end
+\end{lstlisting}
+
+
+Die for-Schleife wird so oft wiederholt, bis 
+
+Listen werden in Lua eigentlich ,,Tabelle`` (Englisch: ,,table``)
+genannt, weil man Listen in Listen haben kann. Wir werden sie sowohl
+Liste als auch Tabelle nennen.
+
+
+\section{Katze}
+
+Eine Katze soll 
+
+
+\section{Bellen}
+
+eine Katze
+
+miau
+
+
+\section{Gewinnen und Zeit}
+
+
+\section{Zusatzaufgaben}
+
+-1. Räume den Code ein wenig auf. Bei der Positionsberechnung des
+Hundes haben wir eine Zahl verwendet, um die Geschwindigkeit zu kontrollieren.
+Man könnte diese jedoch in allen if-Abfragen durch eine in love.load()
+definierte Variable ersetzen und so weniger Zeit mit Tippen verbringen,
+wenn man den Wert ändern möchte, um den Hund schneller oder langsamer
+zu machen.
+
+0. Verhindere, dass der Hund aus dem Bild laufen kann. Das Fenster
+ist 800 mal 600 Pixel groß und eine Lösungsmöglichkeit wäre, mithilfe
+eines \texttt{if}-Blocks in love.update() zu prüfen, ob die neue Position
+innerhalb der Fenstergrenzen ist.
+
+0b. Delta time.
+
+Nun füge \texttt{dt }in die Klammern nach \texttt{love.update} ein,
+sodass \texttt{love.update(dt)} im Code steht. \texttt{dt }steht für
+,,delta time`` (Delta-Zeit, Zeitabstand, Zeitänderung).
+
+Diese zwei Schritte erlauben LÖVE folgendes innerhalb von \texttt{love.update(dt)}
+zu wissen: ,,Der Hund befindet sich am Punkt \textbf{(x,y)} und es
+ist \textbf{dt} Zeit vergangen, seit dem ich das letzte mal \texttt{love.update(dt)}
+berechnet habe.``
+
+Wenn Du das Konzept von \texttt{dt }noch nicht verstehst, könntest
+Du \texttt{zeitAbstand = dt} in \texttt{love.update(dt)} schreiben
+und \texttt{love.graphics.print(zeitAbstand, 400, 400)} in \texttt{love.draw()},
+um zu beobachten, welchen Zahlenwert \texttt{dt }hat. Halte Dich aber
+am besten nicht zu lange mit \texttt{dt} auf.
+
+0c. macht es mehr spaß mit mehr oder weniger bällen?
+
+1. zweiter Spieler. wir empfehlen WASD.
+
+2. Steuerung per Maus oder Gamepad
+
+3. Katze läuft auf Bälle zu
+
+4. Mehrere Katzen
+
+Mehr info
+
+Du kannst LÖVE von http://love2d.org herunterladen und auf http://love2d.org/wiki/
+detaillierte Information zur LÖVE-Programmierung finden. Diese ist
+größtenteils Englischsprachig, am Unteren Rand der Webseite kann man
+auf Deutsch umschalten.
+\end{document}

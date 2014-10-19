@@ -1,0 +1,1410 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\date{}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language german
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Einfach ein Spiel Machen
+\end_layout
+
+\begin_layout Part
+Einleitung
+\end_layout
+
+\begin_layout Standard
+In diesem Workshop wirst Du Schritt für Schritt ein kleines Computerspiel
+ erschaffen.
+ Dazu wirst Du 
+\noun on
+Lua
+\noun default
+-Programmicode abtippen und ergänzen.
+ Dieser wird dann von der LÖVE Spiele-Engine als Programm ausgeführt.
+\end_layout
+
+\begin_layout Standard
+In LÖVE gibt es drei 
+\emph on
+Funktionsblöcke
+\emph default
+, welche die Grundstruktur jedes 
+\noun on
+LÖVE
+\noun default
+-Spiels bilden:
+\end_layout
+
+\begin_layout Itemize
+In 
+\family typewriter
+love.load()
+\family default
+ werden Befehle einmalig zur Vorbereitung ausgeführt.
+ Zum Beispiel sagen wir hier, welche Bilddateien für den Hund und für die
+ Katze benutzt werden und wo sie am Anfang des Spiels auf dem Gras stehen.
+\end_layout
+
+\begin_layout Itemize
+In 
+\family typewriter
+love.update()
+\family default
+ werden Änderungen im Spiel verarbeitet.
+ Beispiel: 
+\begin_inset Quotes gld
+\end_inset
+
+Die linke Pfeiltaste ist im gedrückten zustand.
+ An welcher stelle befindet sich der Hund aktuell?
+\begin_inset Quotes grd
+\end_inset
+
+ Im idealfall wird der Funktionsblock 
+\family typewriter
+love.update()
+\family default
+ 60 mal je Sekunde berechnet, also mit einem Zeitabstand von 
+\begin_inset Formula $0,01\overline{6}$
+\end_inset
+
+ Sekunden.
+\end_layout
+
+\begin_layout Itemize
+In 
+\family typewriter
+love.draw()
+\family default
+ werden Malbefehle verarbeitet.
+ Wir werden Gras, einen Hund und eine Katze malen und etwas Text und Zahlen,
+ um zu zeigen, wie oft der Hund die Katze schon angebellt hat.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Bilder/love-diagram.png
+	scale 80
+	rotateOrigin center
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Grundaufbau eines LÖVE-Spiels
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+So sieht das ganze als Programmcode aus:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function love.load()
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+function love.update()
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+function love.draw()
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Das Spiel
+\end_layout
+
+\begin_layout Standard
+In Deinem Spiel bewegst Du einen Hund auf einer Wiese und verjagst herumlaufende
+ Katzen mit lautem Bellen.
+\end_layout
+
+\begin_layout Section
+Die richtige Datei
+\end_layout
+
+\begin_layout Standard
+Starte den Texteditor 
+\noun on
+Notepad++
+\noun default
+ und öffne die Datei 
+\begin_inset Quotes gld
+\end_inset
+
+main.lua
+\begin_inset Quotes grd
+\end_inset
+
+ im Verzeichnis 
+\begin_inset Quotes gld
+\end_inset
+
+Spiel
+\begin_inset Quotes grd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Wir werden 
+\series bold
+Doppelpunkte
+\series default
+, 
+\series bold
+Anführungszeichen
+\series default
+, 
+\series bold
+Mathematische Symbole
+\series default
+ und 
+\series bold
+Klammern 
+\series default
+tippen und die Tasten 
+\series bold
+Alt
+\series default
+, 
+\series bold
+Strg
+\series default
+, 
+\series bold
+F4
+\series default
+ und 
+\series bold
+F6
+\series default
+ drücken.
+ Drücke mal 
+\series bold
+F6
+\series default
+.
+ Was passiert?
+\end_layout
+
+\begin_layout Section
+Malen
+\end_layout
+
+\begin_layout Standard
+Als erstes soll das Spiel einen Hund malen.
+\end_layout
+
+\begin_layout Subsection
+Hund
+\end_layout
+
+\begin_layout Standard
+Tippe folgenden Programmcode ab:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function love.load()
+\end_layout
+
+\begin_layout Plain Layout
+
+  hundBild = love.graphics.newImage("hund.png")
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+function love.update()
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+function love.draw()
+\end_layout
+
+\begin_layout Plain Layout
+
+  -- Male den Hund am punkt x=300, y=100
+\end_layout
+
+\begin_layout Plain Layout
+
+  love.graphics.draw(hundBild, 300, 100)
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+Achte auf Groß- und Kleinschreibung, sonst funktioniert das Spiel nicht.
+\end_layout
+
+\begin_layout Standard
+Speichere nun die Datei (z.B.
+ durch Druck der Tastenkombination 
+\series bold
+Strg+S
+\series default
+) und Drücke 
+\series bold
+F6
+\series default
+.
+ Wir haben 
+\noun on
+Notepad++
+\noun default
+ so konfiguriert, dass 
+\series bold
+F6
+\series default
+ das Spiel mithilfe von 
+\noun on
+LÖVE
+\noun default
+ ausführt.
+ Diesen Schritt (Speichern und Ausführen) musst Du jedes Mal wiederholen,
+ wenn Du Dein Spiel testen möchtest.
+\end_layout
+
+\begin_layout Standard
+Es sollte ein Programmfenster mit Schwarzer Hintergrundfarbe und einem kleinen
+ Hundegesicht erscheinen.
+\end_layout
+
+\begin_layout Standard
+Um den Test zu beenden, kannst Du 
+\series bold
+Alt+F4
+\series default
+ drücken oder das Fenster mit der Maus schließen.
+\end_layout
+
+\begin_layout Subsection
+Gras
+\end_layout
+
+\begin_layout Standard
+Damit der Hund nicht im Dunkeln sitzt, soll das Spiel Gras malen.
+ Füge folgenden Code als neue Zeile in den 
+\family typewriter
+love.load()
+\family default
+ Funktionsblock ein:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  grasBild = love.graphics.newImage("gras.png")
+\end_layout
+
+\end_inset
+
+Der folgende Code gehört als neue Zeile in den 
+\family typewriter
+love.graphics():
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  -- Zeichnet größeres Bild von Gras
+\end_layout
+
+\begin_layout Plain Layout
+
+  love.graphics.draw(grasBild, 0, 0)
+\end_layout
+
+\end_inset
+
+Nach dem Speichern und Ausführen sollte nun eine Wiese zu sehen sein.
+ Je nachdem, ob Du den Hund oder das Gras an erster Stelle im 
+\family typewriter
+love.draw()
+\family default
+ Funktionsblock stehen hast, ist der Hund zu sehen oder nicht.
+ In letzterem Fall tausche die zwei 
+\family typewriter
+love.graphics.draw()
+\family default
+ Zeilen miteinander aus.
+\end_layout
+
+\begin_layout Subsection
+Erklärung
+\end_layout
+
+\begin_layout Standard
+In der Aufgabe 2.1 sorgen wir mithilfe der 
+\emph on
+Funktion
+\emph default
+ 
+\family typewriter
+love.graphics.newImage()
+\family default
+ dafür, dass 
+\noun on
+LÖVE 
+\noun default
+die Bilddatei 
+\family typewriter
+hund.png
+\family default
+ findet und das wir auf dieses Bild mit dem Wort 
+\family typewriter
+hundBild 
+\family default
+später zugreifen können.
+ Wörter, denen wir mithilfe des Gleichheitszeichens eine Bedeutung zuweisen,
+ heißen 
+\emph on
+Variablen
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Die Funktion 
+\family typewriter
+love.graphics.draw()
+\family default
+ zeichnet 
+\family typewriter
+hundBild
+\family default
+, welches auf die Bilddatei 
+\family typewriter
+hund.png
+\family default
+ verweist.
+ Der Hund erscheint 300 
+\emph on
+Pixel 
+\emph default
+(Bildpunkte) vom linken Rand und 100 Pixel vom oberen Rand entfernt.
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Bilder/koordinaten.png
+	scale 80
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Hund im 
+\noun on
+LÖVE
+\noun default
+-Koordinatensystem
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+In 2.2 wiederholen wir das ganze mit einer anderen Bilddatei und der linken
+ oberen Ecke -- 0 Pixel vom linken und 0 Pixel vom oberen Rand entfernt.
+\end_layout
+
+\begin_layout Standard
+Zwei Minuszeichen bedeuten, dass der Text danach ein Kommentar und nicht
+ Programmcode ist.
+ Das ist nützlich für Notizen und Erinnerungen.
+ Ihr braucht die Kommentare nicht abtippen, könnt aber gerne welche für
+ euch selbst schreiben.
+\end_layout
+
+\begin_layout Section
+Bewegen
+\end_layout
+
+\begin_layout Standard
+Jetzt soll der Hund bewegt werden.
+\end_layout
+
+\begin_layout Subsection
+Position
+\end_layout
+
+\begin_layout Standard
+LÖVE muss die Position des Hundes wissen.
+ Tippe folgendes in 
+\family typewriter
+love.load()
+\family default
+: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  hundX = 300
+\end_layout
+
+\begin_layout Plain Layout
+
+  hundY = 100
+\end_layout
+
+\end_inset
+
+Wir haben Variablen für die X- und Y-Wert des Punktes erstellt, an dem sich
+ der Hund befindet.
+\end_layout
+
+\begin_layout Subsection
+Tastenerkennung und Bewegung
+\end_layout
+
+\begin_layout Standard
+Diese Position Jetzt prüfen wir, ob Pfeiltasten gedrückt werden und wenn
+ ja, wird die Position des Hundes geändert.
+ Füge folgenden 
+\family typewriter
+if
+\family default
+-Abfrageblock in 
+\family typewriter
+love.update()
+\family default
+ ein:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  if love.keyboard.isDown("left") then
+\end_layout
+
+\begin_layout Plain Layout
+
+    hundX = hundX - 5
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\end_inset
+
+
+\family typewriter
+love.keyboard.isDown()
+\family default
+ ist eine Funktion, welche den Namen einer Taste als 
+\emph on
+Parameter 
+\emph default
+(Inhalt der Klammern) erhält und dann 
+\family typewriter
+true 
+\family default
+oder 
+\family typewriter
+false 
+\family default
+ausgibt, abhängig davon, ob die Taste gedrückt wird oder nicht.
+ Der Code im 
+\family typewriter
+if
+\family default
+-Abfrageblock, wird ausgeführt, wenn die 
+\family typewriter
+if
+\family default
+-Abfrage 
+\family typewriter
+true
+\family default
+ ergibt.
+\end_layout
+
+\begin_layout Standard
+Das Spiel reagiert aber noch nicht auf die Taste, 
+\family typewriter
+love.graphics.draw(hundBild, 300, 100)
+\family default
+ verwendet ja immer die Parameter 
+\family typewriter
+300 
+\family default
+und 
+\family typewriter
+100 
+\family default
+für die Position des Hundes.
+ Ersetze die Zahlen mit den Variablen, die wir erstellt haben.
+\end_layout
+
+\begin_layout Standard
+Kopiere den 
+\family typewriter
+if
+\family default
+-Abfrageblock drei mal und passe die Kopien an, sodass die Tasten 
+\begin_inset Quotes gld
+\end_inset
+
+up
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+right
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+down
+\begin_inset Quotes grd
+\end_inset
+
+ die Position des Hundes -- beziehungsweise die Variablen 
+\family typewriter
+hundX 
+\family default
+und 
+\family typewriter
+hundY 
+\family default
+-- ebenfalls ändern.
+\end_layout
+
+\begin_layout Section
+Katze
+\end_layout
+
+\begin_layout Standard
+Eine Katze will unseren Hund nerven, indem sie über den Bildschirm läuft
+ und verschwindet, wenn sie den Rand erreicht, um an einer neuen Stelle
+ aufzutauchen.
+\end_layout
+
+\begin_layout Subsection
+Position, Richtung und Malen
+\end_layout
+
+\begin_layout Standard
+Genau wie der Hund, muss LÖVE das Katzenbild kennen und wissen, wo die Katze
+ sitzt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  katzeBild = love.graphics.newImage("katze.png")
+\end_layout
+
+\begin_layout Plain Layout
+
+  katzeX = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+  katzeY = 400
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In 
+\family typewriter
+love.draw() 
+\family default
+schreibe folgendes, damit die Katze auch zu sehen ist:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  love.graphics.draw(katzeBild, katzeX, katzeY)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Bewegung
+\end_layout
+
+\begin_layout Standard
+Damit sich die Position der Katze andauernd ändert, schreibe folgendes in
+ 
+\family typewriter
+love.update()
+\family default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  katzeX = katzeX + 7
+\end_layout
+
+\end_inset
+
+Nun läuft sie immer nach rechts.
+\end_layout
+
+\begin_layout Subsection
+Rand
+\end_layout
+
+\begin_layout Standard
+Was wenn die Katze nicht mehr im 800 Pixel breiten Bild zu sehen ist? Dann
+ soll sie vom linken Rand vom neuen anfangen zu laufen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  -- "a > b" ergibt true, wenn a größer als b ist
+\end_layout
+
+\begin_layout Plain Layout
+
+  if katzeX > 800 then
+\end_layout
+
+\begin_layout Plain Layout
+
+    -- 0 auf der X-Achse ist ganz links
+\end_layout
+
+\begin_layout Plain Layout
+
+    katzeX = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+    -- Position auf Y-Achse soll zufällig sein
+\end_layout
+
+\begin_layout Plain Layout
+
+    katzeY = math.random(0, 550)
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In 
+\family typewriter
+love.update()
+\family default
+ prüfen wir stur die Horizontale Position der Katze auf der X-Achse mithilfe
+ einer 
+\family typewriter
+if
+\family default
+-
+\emph on
+Abfrage
+\emph default
+ (
+\begin_inset Quotes gld
+\end_inset
+
+if
+\begin_inset Quotes grd
+\end_inset
+
+ bedeutet 
+\begin_inset Quotes gld
+\end_inset
+
+wenn
+\begin_inset Quotes grd
+\end_inset
+
+) und dem Schlüsselwort 
+\family typewriter
+or
+\family default
+ (
+\begin_inset Quotes gld
+\end_inset
+
+oder
+\begin_inset Quotes grd
+\end_inset
+
+) sowie 
+\family typewriter
+then
+\family default
+ (
+\begin_inset Quotes gld
+\end_inset
+
+dann
+\begin_inset Quotes grd
+\end_inset
+
+), welches die Abfrage beendet.
+ Der Code im 
+\family typewriter
+if
+\family default
+-Block wird nur ausgeführt, wenn die 
+\emph on
+Bedingung
+\emph default
+ in der Abfrage 
+\family typewriter
+true 
+\family default
+(
+\begin_inset Quotes gld
+\end_inset
+
+wahr
+\begin_inset Quotes grd
+\end_inset
+
+) lautet.
+\end_layout
+
+\begin_layout Subsection
+Bellen und Verscheuchen
+\end_layout
+
+\begin_layout Standard
+Wenn die Katze dem Hund zu nahe kommt, bellt dieser und die Katze verzieht
+ sich um so schneller...
+ Schreibe folgendes in 
+\family typewriter
+love.load()
+\family default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  bellen = love.audio.newSource("bellen.ogg")
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Und in 
+\family typewriter
+love.update()
+\family default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  xFern = hundX - katzeX
+\end_layout
+
+\begin_layout Plain Layout
+
+  yFern = hundY - katzeY
+\end_layout
+
+\begin_layout Plain Layout
+
+  abstand = math.sqrt(xFern^2 + yFern^2)
+\end_layout
+
+\begin_layout Plain Layout
+
+  if abstand < 40 then
+\end_layout
+
+\begin_layout Plain Layout
+
+    bellen:play()
+\end_layout
+
+\begin_layout Plain Layout
+
+    katzeX = 999
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\end_inset
+
+Nach dem Bellen tun wir so, als wäre die Katze plötzlich ganz weit nach
+ rechts gesprungen (999 auf der X-Achse).
+ Beim nächsten Durchlauf von 
+\family typewriter
+love.update() 
+\family default
+(meist 0,0167 Sekunden später) wirkt das genau so als wäre die Katze wie
+ in 
+\series bold
+4.3
+\series default
+ von selbst aus dem Bild gelaufen.
+\end_layout
+
+\begin_layout Subsection
+Erklärung
+\end_layout
+
+\begin_layout Standard
+Die Berechnung von 
+\family typewriter
+abstand
+\family default
+ erfolgt mithilfe des Euklidischen Abstands (
+\begin_inset Formula $c=\sqrt{(x_{1}-x_{0})^{2}+(y_{1}-y_{0})^{2}}$
+\end_inset
+
+), welcher auf dem Satz des Pythagoras basiert (
+\begin_inset Formula $a^{2}+b^{2}=c^{2}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Section
+Gewinnen und Zeit
+\end_layout
+
+\begin_layout Standard
+Nach einer Weile hat die Katze genug vom Spiel und es wird der Punktestand
+ angezeigt.
+\end_layout
+
+\begin_layout Subsection
+Timer, Game Over und Textanzeige
+\end_layout
+
+\begin_layout Standard
+Schreibe diesen Code in 
+\family typewriter
+love.load()
+\family default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  zeitStart = love.timer.getTime()
+\end_layout
+
+\begin_layout Plain Layout
+
+  zeitJetzt = zeitStart
+\end_layout
+
+\begin_layout Plain Layout
+
+  spielVorbei = false
+\end_layout
+
+\begin_layout Plain Layout
+
+  -- wie oft hat der Hund die Katze angebellt
+\end_layout
+
+\begin_layout Plain Layout
+
+  punkte = 0
+\end_layout
+
+\end_inset
+
+Der folgende Code kommt in 
+\family typewriter
+love.update()
+\family default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  zeitJetzt = math.floor(love.timer.getTime())
+\end_layout
+
+\begin_layout Plain Layout
+
+  if 30 + zeitStart - zeitJetzt < 0 then
+\end_layout
+
+\begin_layout Plain Layout
+
+    spielVorbei = true
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\end_inset
+
+Dieser Code soll ausgeführt werden, nachdem der Hund bellt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+    if not spielVorbei then
+\end_layout
+
+\begin_layout Plain Layout
+
+      punkte = punkte + 1
+\end_layout
+
+\begin_layout Plain Layout
+
+    end
+\end_layout
+
+\end_inset
+
+Und der folgende gehört in 
+\family typewriter
+love.draw()
+\family default
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  if spielVorbei then
+\end_layout
+
+\begin_layout Plain Layout
+
+    nachricht = "Spielende, Punkte: " ..
+ punkte
+\end_layout
+
+\begin_layout Plain Layout
+
+  else
+\end_layout
+
+\begin_layout Plain Layout
+
+    nachricht = "Punkte: " ..
+ punkte
+\end_layout
+
+\begin_layout Plain Layout
+
+  end
+\end_layout
+
+\begin_layout Plain Layout
+
+  love.graphics.print(nachricht, 300, 20)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Erklärung
+\end_layout
+
+\begin_layout Standard
+Zu beginn des Spiels merken wir uns eine Zeit und vergleichen sie mit der
+ aktuellen Zeit während dem Spiel.
+\end_layout
+
+\begin_layout Standard
+Sobald 30 Sekunden vorbei sind, verhindert die Variable 
+\family typewriter
+spielVorbei
+\family default
+, dass Punkte weiter gezählt werden.
+ Auch wird abhängig von 
+\family typewriter
+spielVorbei
+\family default
+ ein anderer Text angezeigt.
+\end_layout
+
+\begin_layout Section
+Bonusaufgaben
+\end_layout
+
+\begin_layout Enumerate
+Macht das Spiel mehr Spaß wenn der Hund und die Katze schneller sind?
+\end_layout
+
+\begin_layout Enumerate
+Kannst Du einen zweiten Hund ins Spiel bringen, der von den Tasten 
+\begin_inset Quotes gld
+\end_inset
+
+w
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+a
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+s
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+d
+\begin_inset Quotes grd
+\end_inset
+
+ gesteuert wird?
+\end_layout
+
+\begin_layout Enumerate
+Es gibt die Datei 
+\family typewriter
+miauen.ogg
+\family default
+.
+ Klingt es besser als das Bellen?
+\end_layout
+
+\begin_layout Enumerate
+Kannst Du dafür sorgen, dass der Hund nicht mehr aus dem Bild laufen kann?
+\end_layout
+
+\begin_layout Enumerate
+Wie würdest Du die verbliebene Zeit während dem Spiel anzeigen?
+\end_layout
+
+\begin_layout Enumerate
+Kannst Du mehr als eine Katze herumlaufen lassen?
+\end_layout
+
+\begin_layout Part
+Mehr erfahren
+\end_layout
+
+\begin_layout Standard
+Du kannst LÖVE von 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://love2d.org"
+
+\end_inset
+
+ herunterladen und auf 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://love2d.org/wiki/"
+
+\end_inset
+
+ detaillierte Information zur LÖVE-Programmierung finden.
+ Diese ist größtenteils Englischsprachig, Am Unteren Rand der Webseite kann
+ man auf Deutsch umschalten.
+\end_layout
+
+\begin_layout Standard
+Du kannst das Material für diesen Workshop von 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://github.com/qubodup/spiel-machen"
+
+\end_inset
+
+ herunterladen
+\end_layout
+
+\end_body
+\end_document
