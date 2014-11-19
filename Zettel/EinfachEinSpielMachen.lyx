@@ -659,8 +659,8 @@ Tastenerkennung und Bewegung
 \end_layout
 
 \begin_layout Standard
-Diese Position Jetzt prüfen wir, ob Pfeiltasten gedrückt werden und wenn
- ja, wird die Position des Hundes geändert.
+Jetzt prüfen wir, ob Pfeiltasten gedrückt werden und ändern die Position
+ des Hundes falls ja.
  Füge folgenden 
 \family typewriter
 if
