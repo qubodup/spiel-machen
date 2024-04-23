@@ -9,7 +9,7 @@ Vorbereitung für Windows-Rechner
 1. Lade die Kursmaterialien als [zip-Datei](https://github.com/qubodup/spiel-machen/archive/master.zip) herunter und entpacke diese.
 2. Lade die "zip package" von [Notepad++](http://notepad-plus-plus.org/download/) herunter und entpacke diese ins Kurs-Verzeichnis.
 3. Lade "32-bit zipped" von [LÖVE](http://love2d.org/#download) herunter und entpacke diese ins Kurs-Verzeichnis.
-4. Konfiguriere Notepad++, sodass die Taste F6 das Spiel mit love.exe mittels relativem Pfad startet. ([Videoanleitung](http://youtu.be/oO83p7arA6w))
+4. Konfiguriere Notepad++, sodass die Taste F6 das Spiel mit love.exe mittels relativem Pfad startet.
 5. Kopiere das Kurs-Verzeichnis auf den Desktop jeden Computers.
 6. Drucke EinfachEinSpielMachen.pdf mal Anzahl der Köpfe aus. 2 Seiten je Blattseite sind lesbar.
 
