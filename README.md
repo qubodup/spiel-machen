@@ -30,8 +30,3 @@ Das Material ist für eine 90-Minuten Unterrichtseinheit konzepiert. Eine Pause 
 5. Erwarte nicht, dass auf den Restlichen Text geachtet wird. Dieser ist für Lehrende und Neugierige.
 6. Laufe im Raum herum und erkläre die aktuelle Aufgabe, lobe Fortschritt und gebe Tipps und Erklärungen.
 7. Das wichtigste ist, dass die Schülerinnen und Schüler das Gefühl bekommen, etwas interaktives geschaffen zu haben. Ob sie es schaffen die Katze oder gar Punkte und Game Over fertigzuimplementieren ist Nebensache.
-
-Kontakt
--------
-
-Bei Fragen bitte Iwan Gabovitch qubodup@gmail.com kontaktieren.
